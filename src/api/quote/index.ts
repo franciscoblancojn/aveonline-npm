@@ -20,11 +20,11 @@ export class AveApiQuote extends AveApiBase {
         return this.onRequest({
             url: "quote",
             method: "POST",
-            body: ({
+            body: {
                 tipo: "cotizarDoble",
                 access: "",
                 ...props,
-            }),
+            },
         });
     }
 }

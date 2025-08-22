@@ -6,7 +6,6 @@ type AveApiBaseUrls =
     | "updateGuide"
     | "transport";
 
-
 export class AveApiBase {
     private URL_AUTHENTICATE =
         "https://app.aveonline.co/api/comunes/v1.0/autenticarusuario.php";
@@ -32,7 +31,6 @@ export class AveApiBase {
         this.token = token ?? "";
         this.idempresa = idempresa ?? 0;
     }
-
 
     private getUrl(key: AveApiBaseUrls): string {
         switch (key) {
@@ -72,7 +70,7 @@ export class AveApiBase {
         body?: object;
     } & Omit<RequestInit, "body">) {
         try {
-            let data = undefined;
+            let data: string | undefined = undefined;
             if (body) {
                 if (this.token) {
                     body = {

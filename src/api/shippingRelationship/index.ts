@@ -5,10 +5,10 @@ export class AveApiShippingRelationship extends AveApiBase {
         return this.onRequest({
             url: "quote",
             method: "POST",
-            body: ({
+            body: {
                 tipo: "relacionEnvios",
                 ...props,
-            }),
+            },
         });
     }
 }

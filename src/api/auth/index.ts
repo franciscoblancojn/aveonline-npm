@@ -31,7 +31,9 @@ export class AveApiAuth extends AveApiBase {
     async onAuthenticate({
         user,
         password,
-    }: IAveApiAuth["onAuthenticate"]["props"]): Promise<IAveApiAuth["onAuthenticate"]["result"]> {
+    }: IAveApiAuth["onAuthenticate"]["props"]): Promise<
+        IAveApiAuth["onAuthenticate"]["result"]
+    > {
         return this.onRequest({
             url: "authenticate",
             method: "POST",

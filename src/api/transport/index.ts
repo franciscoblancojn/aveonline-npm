@@ -5,11 +5,11 @@ export class AveApiTransport extends AveApiBase {
         return this.onRequest({
             url: "transport",
             method: "POST",
-            body: ({
+            body: {
                 tipo: "listarTransportadorasPorEmpresaAuth",
                 token,
                 id: idempresa,
-            }),
+            },
         });
     }
 }

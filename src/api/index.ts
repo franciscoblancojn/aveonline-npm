@@ -14,7 +14,7 @@ export interface IAveApi {
 export class AveApi {
     private data: IAveApi;
     private auth: AveApiAuth;
-    public user: IAveApiAuth["onAuthenticate"]["result"];
+    public user?: IAveApiAuth["onAuthenticate"]["result"];
 
     public agents: AveApiAgents;
     public guide: AveApiGuide;
@@ -26,6 +26,12 @@ export class AveApi {
     constructor(data: IAveApi) {
         this.data = data;
         this.auth = new AveApiAuth();
+        this.agents = new AveApiAgents();
+        this.guide = new AveApiGuide();
+        this.pickup = new AveApiPickup();
+        this.transport = new AveApiTransport();
+        this.quote = new AveApiQuote();
+        this.shippingRelationship = new AveApiShippingRelationship();
     }
     async onLoad() {
         const auth = await this.auth.onAuthenticate(this.data);

@@ -5,10 +5,10 @@ export class AveApiPickup extends AveApiBase {
         return this.onRequest({
             url: "quote",
             method: "POST",
-            body: ({
+            body: {
                 tipo: "generarRecogida2",
                 ...props,
-            }),
+            },
         });
     }
 }
