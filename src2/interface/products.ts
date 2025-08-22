@@ -1,4 +1,4 @@
-export interface IProduct {
+export interface ProductProps {
     alto: number;
     largo: number;
     ancho: number;
