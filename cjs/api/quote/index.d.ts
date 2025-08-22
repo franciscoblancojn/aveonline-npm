@@ -15,5 +15,5 @@ export interface AveApiQuote {
     };
 }
 export declare class AveApiQuote extends AveApiBase {
-    get({ ...props }: AveApiQuote["getProps"]): Promise<any>;
+    get(props: AveApiQuote["getProps"]): Promise<any>;
 }

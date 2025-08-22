@@ -16,7 +16,7 @@ export interface AveApiQuote {
     };
 }
 export class AveApiQuote extends AveApiBase {
-    async get({ ...props }: AveApiQuote["getProps"]) {
+    async get(props: AveApiQuote["getProps"]) {
         return this.onRequest({
             url: "quote",
             method: "POST",
