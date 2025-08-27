@@ -8,6 +8,7 @@ import { AveApiTransport } from "./transport";
 import { AveApiShopify } from "./shopify";
 
 export interface IAveApi {
+    typeAuth?: "authenticate" | "authenticate2";
     user: string;
     password: string;
 }
@@ -40,7 +41,7 @@ export class AveApi {
         const auth = await this.auth.onAuthenticate(this.data);
         this.user = auth;
         this.user.idempresa = auth?.cuentas?.[0]?.usuarios?.[0]?.id;
-        const dataAuth = {
+        let dataAuth = {
             token: auth.token,
             idempresa: auth?.cuentas?.[0]?.usuarios?.[0]?.id,
         };
@@ -50,6 +51,14 @@ export class AveApi {
         this.transport = new AveApiTransport(dataAuth);
         this.quote = new AveApiQuote(dataAuth);
         this.shippingRelationship = new AveApiShippingRelationship(dataAuth);
+
+        if (this.data.typeAuth === "authenticate2") {
+            const auth2 = await this.auth.onAuthenticate2(this.data);
+            dataAuth = {
+                token: auth2.data.token,
+                idempresa: auth2?.data?.idEnterprise,
+            };
+        }
         this.shopify = new AveApiShopify(dataAuth);
     }
 }

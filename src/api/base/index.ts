@@ -1,5 +1,6 @@
 type AveApiBaseUrls =
     | "authenticate"
+    | "authenticate2"
     | "agent"
     | "city"
     | "quote"
@@ -20,6 +21,8 @@ export interface IAveApiBase {
 export class AveApiBase {
     private URL_AUTHENTICATE =
         "https://app.aveonline.co/api/comunes/v1.0/autenticarusuario.php";
+    private URL_AUTHENTICATE_2 =
+        "https://app.aveonline.co/api/auth/v3.0/index.php";
     private URL_AGENTE =
         "https://app.aveonline.co/api/comunes/v1.0/agentes.php";
     private URL_CITY = "https://app.aveonline.co/api/box/v1.0/ciudad.php";
@@ -31,7 +34,7 @@ export class AveApiBase {
         "https://app.aveonline.co/api/box/v1.0/transportadora.php";
 
     private URL_SHOPIFY = {
-        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/v1/token/",
+        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/token/",
     };
 
     protected token: string;
@@ -51,6 +54,8 @@ export class AveApiBase {
         switch (key) {
             case "authenticate":
                 return this.URL_AUTHENTICATE;
+            case "authenticate2":
+                return this.URL_AUTHENTICATE_2;
             case "agent":
                 return this.URL_AGENTE;
             case "city":
