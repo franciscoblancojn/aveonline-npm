@@ -88,14 +88,14 @@ export class AveApiBase {
         try {
             let URL = this.getUrl(url);
             if (query.id !== undefined) {
-                URL = `${url}/${query.id}`;
+                URL = `${URL}/${query.id}`;
                 delete query.id;
             }
             if (Object.keys(query).length) {
                 const queryString = new URLSearchParams(
                     query as Record<string, string>,
                 ).toString();
-                URL = `${url}?${queryString}`;
+                URL = `${URL}?${queryString}`;
             }
             const respond = await fetch(`${URL}`, {
                 headers: {
