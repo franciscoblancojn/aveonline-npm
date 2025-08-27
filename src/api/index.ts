@@ -17,6 +17,7 @@ export class AveApi {
     private data: IAveApi;
     private auth: AveApiAuth;
     public user?: IAveApiAuth["onAuthenticate"]["result"];
+    public user2?: IAveApiAuth["onAuthenticate2"]["result"];
 
     public agents: AveApiAgents;
     public guide: AveApiGuide;
@@ -54,6 +55,7 @@ export class AveApi {
 
         if (this.data.typeAuth === "authenticate2") {
             const auth2 = await this.auth.onAuthenticate2(this.data);
+            this.user2 = auth2;
             dataAuth = {
                 token: auth2.data.token,
                 idempresa: auth2?.data?.idEnterprise,

@@ -34,7 +34,7 @@ export class AveApiBase {
         "https://app.aveonline.co/api/box/v1.0/transportadora.php";
 
     private URL_SHOPIFY = {
-        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/token/",
+        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/token",
     };
 
     protected token: string;
@@ -105,6 +105,7 @@ export class AveApiBase {
             const respond = await fetch(`${URL}`, {
                 headers: {
                     accept: "application/json",
+                    "Content-Type": "application/json",
                     ...headers,
                 },
                 body: JSON.stringify(body),

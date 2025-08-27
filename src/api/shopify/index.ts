@@ -39,7 +39,6 @@ export class AveApiShopify extends AveApiBase {
             },
             headers: {
                 "x-shopify-shop-domain": shop,
-                "Content-Type": "application/json",
                 Authorization: `${this.token}`,
             },
             body: {
