@@ -4,7 +4,18 @@ type AveApiBaseUrls =
     | "city"
     | "quote"
     | "updateGuide"
-    | "transport";
+    | "transport"
+    | "shopify_save_token";
+
+export interface IAveApiBase {
+    onRequestBase: {
+        props: {
+            url: AveApiBaseUrls;
+            query?: { [key: string]: string | number | boolean | undefined };
+            body?: object;
+        } & Omit<RequestInit, "body">;
+    };
+}
 
 export class AveApiBase {
     private URL_AUTHENTICATE =
@@ -19,7 +30,11 @@ export class AveApiBase {
     private URL_TRANSPORT =
         "https://app.aveonline.co/api/box/v1.0/transportadora.php";
 
-    private token: string;
+    private URL_SHOPIFY = {
+        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/v1/token/",
+    };
+
+    protected token: string;
     private idempresa: number;
     constructor({
         token,
@@ -46,6 +61,8 @@ export class AveApiBase {
                 return this.URL_UPDATE_GUIA;
             case "transport":
                 return this.URL_TRANSPORT;
+            case "shopify_save_token":
+                return this.URL_SHOPIFY.SAVE_TOKEN;
             default:
                 throw new Error("Invalid API key");
         }
@@ -61,16 +78,47 @@ export class AveApiBase {
         this.idempresa = idempresa ?? this.idempresa;
     }
 
-    protected async onRequest({
+    protected async onRequestBase({
         body = undefined,
         method = "GET",
         url,
-    }: {
-        url: AveApiBaseUrls;
-        body?: object;
-    } & Omit<RequestInit, "body">) {
+        headers,
+        query = {}
+    }: IAveApiBase["onRequestBase"]["props"]) {
         try {
-            let data: string | undefined = undefined;
+            let URL = this.getUrl(url)
+            if(query.id !== undefined) {
+                URL = `${url}/${query.id}`;
+                delete query.id;
+            }
+            if (Object.keys(query).length) {
+                const queryString = new URLSearchParams(
+                    query as Record<string, string>
+                ).toString();
+                URL = `${url}?${queryString}`;
+            }
+            const respond = await fetch(`${URL}`, {
+                headers: {
+                    accept: "application/json",
+                    ...headers,
+                },
+                body: JSON.stringify(body),
+                method,
+            });
+            const result = await respond.json();
+            return result;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    protected async onRequest({
+        body = undefined,
+        url,
+        ...props
+    }:  IAveApiBase["onRequestBase"]["props"]) {
+        try {
             if (body) {
                 if (this.token) {
                     body = {
@@ -84,17 +132,12 @@ export class AveApiBase {
                         idempresa: this.idempresa,
                     };
                 }
-                data = JSON.stringify(body);
             }
-            const respond = await fetch(`${this.getUrl(url)}`, {
-                headers: {
-                    accept: "application/json",
-                },
-                body: data,
-                method,
+            return this.onRequestBase({
+                url,
+                body,
+                ...props,
             });
-            const result = await respond.json();
-            return result;
         } catch (error) {
             console.error(error);
             throw error;
