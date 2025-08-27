@@ -5,6 +5,7 @@ import { AveApiPickup } from "./pickup";
 import { AveApiQuote } from "./quote";
 import { AveApiShippingRelationship } from "./shippingRelationship";
 import { AveApiTransport } from "./transport";
+import { AveApiShopify } from "./shopify";
 
 export interface IAveApi {
     user: string;
@@ -22,6 +23,7 @@ export class AveApi {
     public transport: AveApiTransport;
     public quote: AveApiQuote;
     public shippingRelationship: AveApiShippingRelationship;
+    public shopify: AveApiShopify;
 
     constructor(data: IAveApi) {
         this.data = data;
@@ -32,6 +34,7 @@ export class AveApi {
         this.transport = new AveApiTransport();
         this.quote = new AveApiQuote();
         this.shippingRelationship = new AveApiShippingRelationship();
+        this.shopify = new AveApiShopify();
     }
     async onLoad() {
         const auth = await this.auth.onAuthenticate(this.data);
@@ -47,5 +50,6 @@ export class AveApi {
         this.transport = new AveApiTransport(dataAuth);
         this.quote = new AveApiQuote(dataAuth);
         this.shippingRelationship = new AveApiShippingRelationship(dataAuth);
+        this.shopify = new AveApiShopify(dataAuth);
     }
 }
