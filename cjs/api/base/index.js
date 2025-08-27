@@ -10,7 +10,7 @@ class AveApiBase {
     URL_UPDATE_GUIA = "https://app.aveonline.co/api/nal/v1.0/plugins/wordpress.php";
     URL_TRANSPORT = "https://app.aveonline.co/api/box/v1.0/transportadora.php";
     URL_SHOPIFY = {
-        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/token/",
+        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/token",
     };
     token;
     idempresa;
@@ -58,6 +58,7 @@ class AveApiBase {
             const respond = await fetch(`${URL}`, {
                 headers: {
                     accept: "application/json",
+                    "Content-Type": "application/json",
                     ...headers,
                 },
                 body: JSON.stringify(body),

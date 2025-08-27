@@ -15,6 +15,7 @@ export declare class AveApi {
     private data;
     private auth;
     user?: IAveApiAuth["onAuthenticate"]["result"];
+    user2?: IAveApiAuth["onAuthenticate2"]["result"];
     agents: AveApiAgents;
     guide: AveApiGuide;
     pickup: AveApiPickup;

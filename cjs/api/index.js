@@ -13,6 +13,7 @@ class AveApi {
     data;
     auth;
     user;
+    user2;
     agents;
     guide;
     pickup;
@@ -47,6 +48,7 @@ class AveApi {
         this.shippingRelationship = new shippingRelationship_1.AveApiShippingRelationship(dataAuth);
         if (this.data.typeAuth === "authenticate2") {
             const auth2 = await this.auth.onAuthenticate2(this.data);
+            this.user2 = auth2;
             dataAuth = {
                 token: auth2.data.token,
                 idempresa: auth2?.data?.idEnterprise,
