@@ -8,6 +8,9 @@ class AveApiBase {
     URL_QUOTE = "https://app.aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php";
     URL_UPDATE_GUIA = "https://app.aveonline.co/api/nal/v1.0/plugins/wordpress.php";
     URL_TRANSPORT = "https://app.aveonline.co/api/box/v1.0/transportadora.php";
+    URL_SHOPIFY = {
+        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/v1/token/",
+    };
     token;
     idempresa;
     constructor({ token, idempresa, } = {}) {
@@ -28,6 +31,8 @@ class AveApiBase {
                 return this.URL_UPDATE_GUIA;
             case "transport":
                 return this.URL_TRANSPORT;
+            case "shopify_save_token":
+                return this.URL_SHOPIFY.SAVE_TOKEN;
             default:
                 throw new Error("Invalid API key");
         }
@@ -36,9 +41,35 @@ class AveApiBase {
         this.token = token ?? this.token;
         this.idempresa = idempresa ?? this.idempresa;
     }
-    async onRequest({ body = undefined, method = "GET", url, }) {
+    async onRequestBase({ body = undefined, method = "GET", url, headers, query = {}, }) {
         try {
-            let data = undefined;
+            let URL = this.getUrl(url);
+            if (query.id !== undefined) {
+                URL = `${url}/${query.id}`;
+                delete query.id;
+            }
+            if (Object.keys(query).length) {
+                const queryString = new URLSearchParams(query).toString();
+                URL = `${url}?${queryString}`;
+            }
+            const respond = await fetch(`${URL}`, {
+                headers: {
+                    accept: "application/json",
+                    ...headers,
+                },
+                body: JSON.stringify(body),
+                method,
+            });
+            const result = await respond.json();
+            return result;
+        }
+        catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    async onRequest({ body = undefined, url, ...props }) {
+        try {
             if (body) {
                 if (this.token) {
                     body = {
@@ -52,17 +83,12 @@ class AveApiBase {
                         idempresa: this.idempresa,
                     };
                 }
-                data = JSON.stringify(body);
             }
-            const respond = await fetch(`${this.getUrl(url)}`, {
-                headers: {
-                    accept: "application/json",
-                },
-                body: data,
-                method,
+            return this.onRequestBase({
+                url,
+                body,
+                ...props,
             });
-            const result = await respond.json();
-            return result;
         }
         catch (error) {
             console.error(error);

@@ -83,17 +83,17 @@ export class AveApiBase {
         method = "GET",
         url,
         headers,
-        query = {}
+        query = {},
     }: IAveApiBase["onRequestBase"]["props"]) {
         try {
-            let URL = this.getUrl(url)
-            if(query.id !== undefined) {
+            let URL = this.getUrl(url);
+            if (query.id !== undefined) {
                 URL = `${url}/${query.id}`;
                 delete query.id;
             }
             if (Object.keys(query).length) {
                 const queryString = new URLSearchParams(
-                    query as Record<string, string>
+                    query as Record<string, string>,
                 ).toString();
                 URL = `${url}?${queryString}`;
             }
@@ -117,7 +117,7 @@ export class AveApiBase {
         body = undefined,
         url,
         ...props
-    }:  IAveApiBase["onRequestBase"]["props"]) {
+    }: IAveApiBase["onRequestBase"]["props"]) {
         try {
             if (body) {
                 if (this.token) {

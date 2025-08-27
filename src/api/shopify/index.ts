@@ -26,12 +26,14 @@ export class AveApiShopify extends AveApiBase {
         token,
         idempresa,
         "x-shopify-shop-domain": shop,
-    }: IAveApiShopify["onSaveToken"]["props"]) : Promise<IAveApiShopify["onSaveToken"]["result"]> {
+    }: IAveApiShopify["onSaveToken"]["props"]): Promise<
+        IAveApiShopify["onSaveToken"]["result"]
+    > {
         return await this.onRequestBase({
             url: "shopify_save_token",
             method: "POST",
-            query:{
-                id:idempresa
+            query: {
+                id: idempresa,
             },
             headers: {
                 "x-shopify-shop-domain": shop,

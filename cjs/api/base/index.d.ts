@@ -1,4 +1,15 @@
-type AveApiBaseUrls = "authenticate" | "agent" | "city" | "quote" | "updateGuide" | "transport";
+type AveApiBaseUrls = "authenticate" | "agent" | "city" | "quote" | "updateGuide" | "transport" | "shopify_save_token";
+export interface IAveApiBase {
+    onRequestBase: {
+        props: {
+            url: AveApiBaseUrls;
+            query?: {
+                [key: string]: string | number | boolean | undefined;
+            };
+            body?: object;
+        } & Omit<RequestInit, "body">;
+    };
+}
 export declare class AveApiBase {
     private URL_AUTHENTICATE;
     private URL_AGENTE;
@@ -6,7 +17,8 @@ export declare class AveApiBase {
     private URL_QUOTE;
     private URL_UPDATE_GUIA;
     private URL_TRANSPORT;
-    private token;
+    private URL_SHOPIFY;
+    protected token: string;
     private idempresa;
     constructor({ token, idempresa, }?: {
         token?: string;
@@ -17,9 +29,7 @@ export declare class AveApiBase {
         token?: string;
         idempresa?: number;
     }): void;
-    protected onRequest({ body, method, url, }: {
-        url: AveApiBaseUrls;
-        body?: object;
-    } & Omit<RequestInit, "body">): Promise<any>;
+    protected onRequestBase({ body, method, url, headers, query, }: IAveApiBase["onRequestBase"]["props"]): Promise<any>;
+    protected onRequest({ body, url, ...props }: IAveApiBase["onRequestBase"]["props"]): Promise<any>;
 }
 export {};

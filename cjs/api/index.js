@@ -8,6 +8,7 @@ const pickup_1 = require("./pickup");
 const quote_1 = require("./quote");
 const shippingRelationship_1 = require("./shippingRelationship");
 const transport_1 = require("./transport");
+const shopify_1 = require("./shopify");
 class AveApi {
     data;
     auth;
@@ -18,6 +19,7 @@ class AveApi {
     transport;
     quote;
     shippingRelationship;
+    shopify;
     constructor(data) {
         this.data = data;
         this.auth = new auth_1.AveApiAuth();
@@ -27,6 +29,7 @@ class AveApi {
         this.transport = new transport_1.AveApiTransport();
         this.quote = new quote_1.AveApiQuote();
         this.shippingRelationship = new shippingRelationship_1.AveApiShippingRelationship();
+        this.shopify = new shopify_1.AveApiShopify();
     }
     async onLoad() {
         const auth = await this.auth.onAuthenticate(this.data);
@@ -42,6 +45,7 @@ class AveApi {
         this.transport = new transport_1.AveApiTransport(dataAuth);
         this.quote = new quote_1.AveApiQuote(dataAuth);
         this.shippingRelationship = new shippingRelationship_1.AveApiShippingRelationship(dataAuth);
+        this.shopify = new shopify_1.AveApiShopify(dataAuth);
     }
 }
 exports.AveApi = AveApi;

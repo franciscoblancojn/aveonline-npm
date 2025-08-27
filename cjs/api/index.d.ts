@@ -5,6 +5,7 @@ import { AveApiPickup } from "./pickup";
 import { AveApiQuote } from "./quote";
 import { AveApiShippingRelationship } from "./shippingRelationship";
 import { AveApiTransport } from "./transport";
+import { AveApiShopify } from "./shopify";
 export interface IAveApi {
     user: string;
     password: string;
@@ -19,6 +20,7 @@ export declare class AveApi {
     transport: AveApiTransport;
     quote: AveApiQuote;
     shippingRelationship: AveApiShippingRelationship;
+    shopify: AveApiShopify;
     constructor(data: IAveApi);
     onLoad(): Promise<void>;
 }
