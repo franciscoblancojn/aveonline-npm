@@ -7,6 +7,7 @@ import { AveApiShippingRelationship } from "./shippingRelationship";
 import { AveApiTransport } from "./transport";
 import { AveApiShopify } from "./shopify";
 export interface IAveApi {
+    typeAuth?: "authenticate" | "authenticate2";
     user: string;
     password: string;
 }

@@ -15,6 +15,18 @@ class AveApiAuth extends base_1.AveApiBase {
             },
         });
     }
+    async onAuthenticate2({ user, password, }) {
+        return this.onRequest({
+            url: "authenticate2",
+            method: "POST",
+            body: {
+                tipo: "AuthProduct",
+                user,
+                password,
+                tiempoToken: 100000,
+            },
+        });
+    }
 }
 exports.AveApiAuth = AveApiAuth;
 //# sourceMappingURL=index.js.map

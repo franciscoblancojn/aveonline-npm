@@ -3,13 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AveApiBase = void 0;
 class AveApiBase {
     URL_AUTHENTICATE = "https://app.aveonline.co/api/comunes/v1.0/autenticarusuario.php";
+    URL_AUTHENTICATE_2 = "https://app.aveonline.co/api/auth/v3.0/index.php";
     URL_AGENTE = "https://app.aveonline.co/api/comunes/v1.0/agentes.php";
     URL_CITY = "https://app.aveonline.co/api/box/v1.0/ciudad.php";
     URL_QUOTE = "https://app.aveonline.co/api/nal/v1.0/generarGuiaTransporteNacional.php";
     URL_UPDATE_GUIA = "https://app.aveonline.co/api/nal/v1.0/plugins/wordpress.php";
     URL_TRANSPORT = "https://app.aveonline.co/api/box/v1.0/transportadora.php";
     URL_SHOPIFY = {
-        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/v1/token/",
+        SAVE_TOKEN: "https://api.aveonline.co/api-shopify/public/api/token/",
     };
     token;
     idempresa;
@@ -21,6 +22,8 @@ class AveApiBase {
         switch (key) {
             case "authenticate":
                 return this.URL_AUTHENTICATE;
+            case "authenticate2":
+                return this.URL_AUTHENTICATE_2;
             case "agent":
                 return this.URL_AGENTE;
             case "city":

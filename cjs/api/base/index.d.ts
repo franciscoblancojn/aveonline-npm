@@ -1,4 +1,4 @@
-type AveApiBaseUrls = "authenticate" | "agent" | "city" | "quote" | "updateGuide" | "transport" | "shopify_save_token";
+type AveApiBaseUrls = "authenticate" | "authenticate2" | "agent" | "city" | "quote" | "updateGuide" | "transport" | "shopify_save_token";
 export interface IAveApiBase {
     onRequestBase: {
         props: {
@@ -12,6 +12,7 @@ export interface IAveApiBase {
 }
 export declare class AveApiBase {
     private URL_AUTHENTICATE;
+    private URL_AUTHENTICATE_2;
     private URL_AGENTE;
     private URL_CITY;
     private URL_QUOTE;

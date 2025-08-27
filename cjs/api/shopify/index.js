@@ -13,7 +13,7 @@ class AveApiShopify extends base_1.AveApiBase {
             headers: {
                 "x-shopify-shop-domain": shop,
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${this.token}`,
+                Authorization: `${this.token}`,
             },
             body: {
                 token,

@@ -35,7 +35,7 @@ class AveApi {
         const auth = await this.auth.onAuthenticate(this.data);
         this.user = auth;
         this.user.idempresa = auth?.cuentas?.[0]?.usuarios?.[0]?.id;
-        const dataAuth = {
+        let dataAuth = {
             token: auth.token,
             idempresa: auth?.cuentas?.[0]?.usuarios?.[0]?.id,
         };
@@ -45,6 +45,13 @@ class AveApi {
         this.transport = new transport_1.AveApiTransport(dataAuth);
         this.quote = new quote_1.AveApiQuote(dataAuth);
         this.shippingRelationship = new shippingRelationship_1.AveApiShippingRelationship(dataAuth);
+        if (this.data.typeAuth === "authenticate2") {
+            const auth2 = await this.auth.onAuthenticate2(this.data);
+            dataAuth = {
+                token: auth2.data.token,
+                idempresa: auth2?.data?.idEnterprise,
+            };
+        }
         this.shopify = new shopify_1.AveApiShopify(dataAuth);
     }
 }
