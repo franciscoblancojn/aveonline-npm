@@ -6,6 +6,7 @@ export interface IAveApiShopify {
             "x-shopify-shop-domain": string;
             token: string;
             idempresa: number;
+            id_font?: number;
         };
         result: {
             success: boolean;
@@ -26,6 +27,7 @@ export class AveApiShopify extends AveApiBase {
         token,
         idempresa,
         "x-shopify-shop-domain": shop,
+        id_font
     }: IAveApiShopify["onSaveToken"]["props"]): Promise<
         IAveApiShopify["onSaveToken"]["result"]
     > {
@@ -42,6 +44,7 @@ export class AveApiShopify extends AveApiBase {
             },
             body: {
                 token,
+                id_font
             },
         });
     }
