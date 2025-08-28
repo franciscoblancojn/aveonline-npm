@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AveApiShopify = void 0;
 const base_1 = require("../base");
 class AveApiShopify extends base_1.AveApiBase {
-    async onSaveToken({ token, idempresa, "x-shopify-shop-domain": shop, id_font, }) {
+    async onSaveToken({ token, idempresa, "x-shopify-shop-domain": shop, modify, }) {
         return await this.onRequestBase({
             url: "shopify_save_token",
             method: "POST",
@@ -16,7 +16,7 @@ class AveApiShopify extends base_1.AveApiBase {
             },
             body: {
                 token,
-                id_font,
+                modify,
             },
         });
     }
