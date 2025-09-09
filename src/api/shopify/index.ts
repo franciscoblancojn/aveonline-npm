@@ -29,7 +29,7 @@ export class AveApiShopify extends AveApiBase {
         idempresa,
         "x-shopify-shop-domain": shop,
         modify,
-        idagente
+        idagente,
     }: IAveApiShopify["onSaveToken"]["props"]): Promise<
         IAveApiShopify["onSaveToken"]["result"]
     > {
@@ -46,7 +46,7 @@ export class AveApiShopify extends AveApiBase {
             body: {
                 token,
                 modify,
-                idagente
+                idagente,
             },
         });
     }

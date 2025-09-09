@@ -5,6 +5,7 @@ export interface IAveApiShopify {
             "x-shopify-shop-domain": string;
             token: string;
             idempresa: number;
+            idagente: number;
             modify?: number;
         };
         result: {
@@ -21,5 +22,5 @@ export interface IAveApiShopify {
     };
 }
 export declare class AveApiShopify extends AveApiBase {
-    onSaveToken({ token, idempresa, "x-shopify-shop-domain": shop, modify, }: IAveApiShopify["onSaveToken"]["props"]): Promise<IAveApiShopify["onSaveToken"]["result"]>;
+    onSaveToken({ token, idempresa, "x-shopify-shop-domain": shop, modify, idagente, }: IAveApiShopify["onSaveToken"]["props"]): Promise<IAveApiShopify["onSaveToken"]["result"]>;
 }
