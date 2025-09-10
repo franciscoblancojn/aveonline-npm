@@ -43,7 +43,7 @@ export class AveApi {
         this.user = auth;
         this.user.idempresa = auth?.cuentas?.[0]?.usuarios?.[0]?.id;
         let dataAuth = {
-            token: auth.token,
+            token: auth?.token,
             idempresa: auth?.cuentas?.[0]?.usuarios?.[0]?.id,
         };
         this.agents = new AveApiAgents(dataAuth);
@@ -57,7 +57,7 @@ export class AveApi {
             const auth2 = await this.auth.onAuthenticate2(this.data);
             this.user2 = auth2;
             dataAuth = {
-                token: auth2.data.token,
+                token: auth2?.data?.token,
                 idempresa: auth2?.data?.idEnterprise,
             };
         }
