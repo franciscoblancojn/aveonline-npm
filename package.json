@@ -1,6 +1,6 @@
 {
   "name": "aveonline",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "description": "Libreria para conectarce con Aveonline",
   "main": "./cjs/index.js",
   "module": "./cjs/index.js",
