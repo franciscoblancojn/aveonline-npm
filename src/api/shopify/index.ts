@@ -8,6 +8,7 @@ export interface IAveApiShopify {
             idempresa: number;
             agentId: number;
             modify?: number;
+            config?: any;
         };
         result: {
             success: boolean;
@@ -30,6 +31,7 @@ export class AveApiShopify extends AveApiBase {
         "x-shopify-shop-domain": shop,
         modify,
         agentId,
+        config = {}
     }: IAveApiShopify["onSaveToken"]["props"]): Promise<
         IAveApiShopify["onSaveToken"]["result"]
     > {
@@ -47,6 +49,7 @@ export class AveApiShopify extends AveApiBase {
                 token,
                 modify,
                 agentId,
+                config
             },
         });
     }
