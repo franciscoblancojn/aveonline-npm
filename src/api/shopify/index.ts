@@ -31,7 +31,7 @@ export class AveApiShopify extends AveApiBase {
         "x-shopify-shop-domain": shop,
         modify,
         agentId,
-        config = {}
+        config = {},
     }: IAveApiShopify["onSaveToken"]["props"]): Promise<
         IAveApiShopify["onSaveToken"]["result"]
     > {
@@ -49,7 +49,7 @@ export class AveApiShopify extends AveApiBase {
                 token,
                 modify,
                 agentId,
-                config
+                config,
             },
         });
     }
